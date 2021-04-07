@@ -1,12 +1,24 @@
-import React, {Component} from 'react';
-import {YellowBox} from 'react-native';
+import {StackNavigator} from 'react-navigation';
 import EventList from './EventList';
+import EventForm from './EventForm';
+import {YellowBox} from 'react-native';
 
-class App extends Component{
-  render(){
-  return (
-    <EventList/>
-    )
-  }
-}
-export default App;
+YellowBox.ignoreWarnings([
+  'Warning: componentWillMount is deprecated',
+  'Warning: componentWillReceiveProps is deprecated',
+]);
+
+export default StackNavigator({
+  list: {
+    screen: EventList,
+    navigationOptions: () => ({
+      title: 'Your events',
+    }),
+  },
+  form: {
+    screen: EventForm,
+    navigationOptions: () => ({
+      title: 'Add an event',
+    }),
+  },
+});
